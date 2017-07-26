@@ -4,13 +4,14 @@ package com.example.common;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RedirectController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return "redirect:/index.html";
+		return "index";
 	}
 	
 	@RequestMapping("/test")
@@ -22,5 +23,11 @@ public class RedirectController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		return "login";
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public String testConsume(Model model, String newMessage) {
+		model.addAttribute("sampleMessage", "New message: "+newMessage);
+		return "test";
 	}
 }
